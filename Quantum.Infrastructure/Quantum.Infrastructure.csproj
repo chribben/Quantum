@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{499C7443-2DFE-4FC3-8739-ABA6EF32D996}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Quantum.Infrastructure</RootNamespace>
+    <AssemblyName>Quantum.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.2.5.4\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonDomain, Version=1.4.0.0, Culture=neutral, PublicKeyToken=ec37a15dc44010cd, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonDomain.1.4.0\lib\net40\CommonDomain.dll</HintPath>
+    </Reference>
+    <Reference Include="EventStore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7735eb81c0bd9948, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventStore.3.0.11326.44\lib\net40\EventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Magnum">
+      <HintPath>..\packages\Magnum.2.0.0.4\lib\NET40\Magnum.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit">
+      <HintPath>..\packages\MassTransit.2.0.1.2\lib\net40\MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.Transports.MSMQ">
+      <HintPath>..\packages\MassTransit.2.0.1.2\lib\net40\MassTransit.Transports.MSMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.Transports.RabbitMq">
+      <HintPath>..\packages\MassTransit.RabbitMQ.2.0.1.2\lib\net40\MassTransit.Transports.RabbitMq.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.WindsorIntegration">
+      <HintPath>..\packages\MassTransit.CastleWindsor.2.0.1.2\lib\net40\MassTransit.WindsorIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=2.6.1.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RabbitMQ.Client.2.6.1\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AggregateFactory.cs" />
+    <Compile Include="Installers\BusInstaller.cs" />
+    <Compile Include="Installers\CommandHandlerInstaller.cs" />
+    <Compile Include="Installers\RepositoryInstaller.cs" />
+    <Compile Include="Installers\EventPublisherInstaller.cs" />
+    <Compile Include="Installers\EventStoreInstaller.cs" />
+    <Compile Include="Installers\SagaInstaller.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Readme\EventStore - Architectural Overview.docx" />
+    <None Include="App_Readme\EventStore - Transactional Integrity.docx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Quantum.Commands\Quantum.Commands.csproj">
+      <Project>{F3F7E7B3-5F85-4500-86DA-B73A32849FF1}</Project>
+      <Name>Quantum.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quantum.Domain\Quantum.Domain.csproj">
+      <Project>{F59C10B1-AB94-42F1-9776-EB04A4784BD7}</Project>
+      <Name>Quantum.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quantum.EventStore\Quantum.EventStore.csproj">
+      <Project>{43528EFD-1BEB-400E-A9DC-BF2DBC63A6A7}</Project>
+      <Name>Quantum.EventStore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quantum.Repository\Quantum.Repository.csproj">
+      <Project>{5B09E12F-1963-4EF6-891B-A6152081CF42}</Project>
+      <Name>Quantum.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\EventStore.license.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
