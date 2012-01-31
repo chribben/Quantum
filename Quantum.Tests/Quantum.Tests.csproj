@@ -61,11 +61,9 @@
     <Reference Include="MassTransit">
       <HintPath>..\packages\MassTransit.2.0.1.2\lib\net40\MassTransit.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.Reactive">
-      <HintPath>..\..\MassTransit\src\MassTransit.Reactive\bin\Debug\MassTransit.Reactive.dll</HintPath>
-    </Reference>
-    <Reference Include="MassTransit.TestFramework">
-      <HintPath>..\..\MassTransit\src\MassTransit.TestFramework\bin\Debug\MassTransit.TestFramework.dll</HintPath>
+    <Reference Include="MassTransit.TestFramework, Version=2.0.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MassTransit.TestFramework\MassTransit.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="MassTransit.WindsorIntegration">
       <HintPath>..\packages\MassTransit.CastleWindsor.2.0.1.2\lib\net40\MassTransit.WindsorIntegration.dll</HintPath>
