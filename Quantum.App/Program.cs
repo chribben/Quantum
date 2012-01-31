@@ -64,6 +64,7 @@ namespace Quantum.App
 
 		private void CreateBatch(Guid batchId)
 		{
+			GetDomainService().Send(new CreateBatch(batchId));
 		}
 
 		private static void Description()

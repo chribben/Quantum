@@ -15,7 +15,7 @@ namespace Quantum.Infrastructure.Installers
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
 			container.Register(
-				Component.For<DocumentUnderstandingSaga>(),
+				Component.For<ISaga>().ImplementedBy<DocumentUnderstandingSaga>(),
 				Component.For(typeof(ISagaRepository<>))
 					.ImplementedBy(typeof(InMemorySagaRepository<>))
 					.LifeStyle.Singleton);

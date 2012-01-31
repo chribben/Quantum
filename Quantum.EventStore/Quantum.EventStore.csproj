@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EventStore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7735eb81c0bd9948, processorArchitecture=MSIL" />
+    <Reference Include="Magnum, Version=2.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Magnum.2.0.0.4\lib\NET40\Magnum.dll</HintPath>
+    </Reference>
     <Reference Include="MassTransit">
       <HintPath>..\Quantum.DocumentUnderstanding\bin\Debug\MassTransit.dll</HintPath>
     </Reference>

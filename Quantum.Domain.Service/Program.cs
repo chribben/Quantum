@@ -1,8 +1,13 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using MassTransit.Pipeline;
 using MassTransit.Saga;
+using MassTransit.Testing;
+using Quantum.Commands;
 using Quantum.Domain.Domain;
+using Quantum.Domain.Events;
 using Quantum.Infrastructure;
 using Quantum.Infrastructure.Installers;
 using MassTransit;
@@ -44,10 +49,12 @@ namespace Quantum.Domain.Service
 			_Logger.Info("setting up domain service, installing components");
 
 			_Container = new WindsorContainer().Install(
-				new BusInstaller("rabbitmq://localhost/Quantum.Domain.Service"),
-				new EventStoreInstaller(),
+				new RepositoryInstaller(),
+				new SagaInstaller(),
 				new CommandHandlerInstaller(),
-				new SagaInstaller());
+				new EventStoreInstaller(),
+				new BusInstaller("rabbitmq://localhost/Quantum.Domain.Service"),
+				new EventPublisherInstaller());
 
 			_Container.Register(Component.For<IWindsorContainer>().Instance(_Container));
 			_Bus = _Container.Resolve<IServiceBus>();

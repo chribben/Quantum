@@ -26,8 +26,7 @@ namespace Quantum.Tests.Infrastructure
 
 		public TestCommandHandlersCanConsumeMessagesFromBus()
 		{
-			_container = new WindsorContainer().Register(Component.For<MyEventConsumer>());
-
+			_container = new WindsorContainer();
 			_container.Install(
 				new CommandHandlerInstaller(),
 				new EventPublisherInstaller(),
@@ -40,12 +39,6 @@ namespace Quantum.Tests.Infrastructure
 		[Given]
 		public void installation_of_infrastructure_objects()
 		{
-		}
-
-		[Then]
-		public void Should_have_a_subscription_for_SeparateDocumentsRequested_event()
-		{
-			Assert.AreEqual(LocalBus.HasSubscription<SeparateDocumentsRequested>().Count(), 1, "No subscription for the SeparateDocumentsRequested was found.");
 		}
 
 

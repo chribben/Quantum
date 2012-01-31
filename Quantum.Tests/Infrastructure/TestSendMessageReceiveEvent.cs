@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -7,10 +8,12 @@ using CommonDomain.Persistence;
 using Machine.Specifications;
 using MassTransit;
 using MassTransit.Pipeline.Inspectors;
+using MassTransit.Testing;
 using NUnit.Framework;
 using Quantum.Commands;
 using Quantum.Domain.CommandHandlers;
 using Quantum.Domain.Domain;
+using Quantum.Domain.Events;
 using Quantum.Infrastructure.Installers;
 using log4net;
 using log4net.Config;
@@ -21,8 +24,6 @@ namespace Quantum.Tests.Infrastructure
 	public class TestSendMessageReceiveEvent
 	{
 		private IWindsorContainer _container;
-		private readonly List<ICommandHandler<Command>> _commandHandlers = new List<ICommandHandler<Command>>();
-		private readonly MyEventConsumer _myConsumer = new MyEventConsumer(new ManualResetEvent(false));
 		private readonly Guid _aggregateId = Guid.NewGuid();
 		private static readonly ILog _Logger = LogManager.GetLogger(typeof (TestSendMessageReceiveEvent));
 		private readonly ManualResetEvent _received = new ManualResetEvent(false);
@@ -39,8 +40,9 @@ namespace Quantum.Tests.Infrastructure
 		{
 			_Logger.Info("Installing stuff");
 			_container =
-				new WindsorContainer().Register(
-					Component.For<MyEventConsumer>().UsingFactoryMethod(() => new MyEventConsumer(_received)));
+				new WindsorContainer();//.Register(Component.For<ManualResetEvent>().Instance(_received));
+			_container.Register(
+					Component.For<MyEventConsumer>().LifeStyle.Singleton);
 			_container.Install(
 				new CommandHandlerInstaller(),
 				new EventPublisherInstaller(),
@@ -59,10 +61,11 @@ namespace Quantum.Tests.Infrastructure
 		{
 			LocalBus.Publish(new RequestSeparateDocuments(_aggregateId));
 		}
-
+			
 		[Then]
 		public void corresponding_event_should_be_received_by_consumer()
 		{
+			Assert.AreEqual(LocalBus.HasSubscription<SeparateDocumentsRequested>().Count(), 1, "No subscription for the SeparateDocumentsRequested was found.");
 			_received.WaitOne(10000).ShouldBeTrue();
 		}
 

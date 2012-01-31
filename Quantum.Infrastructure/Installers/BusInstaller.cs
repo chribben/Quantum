@@ -3,9 +3,11 @@ using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using EventStore.Dispatcher;
 using MassTransit;
 using MassTransit.Saga;
 using Quantum.Domain.Domain;
+using Quantum.EventStore;
 
 namespace Quantum.Infrastructure.Installers
 {
@@ -45,14 +47,14 @@ namespace Quantum.Infrastructure.Installers
 					                                                		sbc.Subscribe(c => c.LoadFrom(container));
 					                                                	})).LifeStyle.Singleton);
 
-            var bus = container.Resolve<IServiceBus>();
+			//var bus = container.Resolve<IServiceBus>();
 
-			bus.SubscribeSaga(new InMemorySagaRepository<DocumentUnderstandingSaga>());
-			//Component.For<IBus>()
-			//    .UsingFactoryMethod((k, c) => 
-			//        new MassTransitPublisher(k.Resolve<IServiceBus>()))
-			//    .Forward<IDispatchCommits>()
-			//    .LifeStyle.Singleton);
+			//bus.SubscribeSaga(new InMemorySagaRepository<DocumentUnderstandingSaga>());
+			//container.Register(Component.For<MassTransitPublisher>()
+			//                    .UsingFactoryMethod((k, c) =>
+			//                                        new MassTransitPublisher(k.Resolve<IServiceBus>()))
+			//                    .Forward<IDispatchCommits>()
+			//                    .LifeStyle.Singleton);
 		}
 	}
 }

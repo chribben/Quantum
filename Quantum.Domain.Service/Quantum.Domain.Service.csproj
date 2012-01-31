@@ -100,6 +100,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Quantum.Commands\Quantum.Commands.csproj">
+      <Project>{F3F7E7B3-5F85-4500-86DA-B73A32849FF1}</Project>
+      <Name>Quantum.Commands</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Quantum.Domain\Quantum.Domain.csproj">
       <Project>{A9EE33AB-B226-491C-8F14-A78069618F21}</Project>
       <Name>Quantum.Domain</Name>

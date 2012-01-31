@@ -1,4 +1,6 @@
+using System.Linq;
 using MassTransit;
+using MassTransit.Testing;
 using Quantum.Domain.Events;
 
 namespace Quantum.EventStore
