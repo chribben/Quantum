@@ -23,14 +23,8 @@ namespace Quantum.Tests.Infrastructure
 		IWindsorContainer _container;
 		private IEventStore _eventStore;
 		private IEventPublisher _eventPublisher;
-		private readonly List<Consumes<Command>.All> _commandHandlers = new List<Consumes<Command>.All>();
 		private IRepository _repository;
-		private Consumes<RequestClassifyDocuments>.All _requestClassifyDocumentsCommandHandler;
-		private Consumes<RequestSeparateDocuments>.All _requestSeparateDocumentsCommandHandler;
 
-		public TestObjectGraph()
-		{
-		}
 
 		[Given]
 		public void installation_of_infrastructure_objects()

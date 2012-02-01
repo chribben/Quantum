@@ -40,7 +40,7 @@ namespace Quantum.Tests.Infrastructure
 		{
 			_Logger.Info("Installing stuff");
 			_container =
-				new WindsorContainer();//.Register(Component.For<ManualResetEvent>().Instance(_received));
+				new WindsorContainer().Register(Component.For<ManualResetEvent>().Instance(_received));
 			_container.Register(
 					Component.For<MyEventConsumer>().LifeStyle.Singleton);
 			_container.Install(
@@ -66,7 +66,7 @@ namespace Quantum.Tests.Infrastructure
 		public void corresponding_event_should_be_received_by_consumer()
 		{
 			Assert.AreEqual(LocalBus.HasSubscription<SeparateDocumentsRequested>().Count(), 1, "No subscription for the SeparateDocumentsRequested was found.");
-			_received.WaitOne(10000).ShouldBeTrue();
+			_received.WaitOne(5000).ShouldBeTrue();
 		}
 
 		[TestFixtureTearDown]
